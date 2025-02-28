@@ -19,6 +19,7 @@ public class ReadDriver {
       cnfe.printStackTrace();
     }
     
-    System.out.println(readAccount.getBalance());
+    System.out.println("Account ID: " + readAccount.getID());
+    System.out.println("Balance:    $" + readAccount.getBalance());
   }
 }
