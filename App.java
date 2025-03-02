@@ -57,6 +57,23 @@ public class App extends Application {
       TextField registerAddressField = new TextField();
       Button submitButton = new Button("Submit");
       
+      // Layout elements
+      VBox registerVbox = new VBox(10,
+        registerUsernameLabel, registerUsernameField, 
+        registerPasswordLabel, registerPasswordField, 
+        registerNameLabel, registerNameField,
+        registerEmailLabel, registerEmailField,
+        registerPhoneLabel, registerPhoneField,
+        registerAddressLabel, registerAddressField,
+        submitButton
+      );
+
+      // Create scene and put it on register stage.
+      Scene registerScene = new Scene(registerVbox, 640, 480);
+      registerStage.setScene(registerScene);
+      registerStage.show();
+      
+      // EventHandler for the Submit button. Creates new User and adds it to the Bank user list.
       submitButton.setOnAction(event -> {
         User newUser = new User(
           registerUsernameField.getText(),
