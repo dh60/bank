@@ -22,7 +22,11 @@ public class Account implements Serializable {
     balance += amount;
   }
   
-  public void withdraw(double amount) {
-    balance -= amount;
+  public double withdraw(double amount) {
+    if ((balance - amount) >= 0) { 
+      balance -= amount;
+      return amount;
+    }
+    return 0;
   }
 }
