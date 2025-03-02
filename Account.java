@@ -1,13 +1,16 @@
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Account implements Serializable {
   private static int nextID = 1;
   private final int accountID;
   private double balance;
+  private ArrayList<Transaction> transactions;
   
   public Account() {
     accountID = nextID++;
     balance = 0;
+    transactions = new ArrayList<>();
   }
   
   public int getID() {
