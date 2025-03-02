@@ -1,6 +1,7 @@
 import java.time.Instant;
+import java.util.Serializable;
 
-public class Transaction {
+public class Transaction implements Serializable {
   private int sender;
   private int recipient;
   private double amount;
