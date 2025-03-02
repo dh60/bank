@@ -21,4 +21,11 @@ public class User {
     Account chequing = new Account();
     accounts.add(chequing);
   }
+  
+  public boolean authenticate(String username, String password) {
+    if (this.username == username && this.password == password) {
+      return true;
+    }
+    return false;
+  }
 }
