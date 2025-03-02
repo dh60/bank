@@ -1,5 +1,5 @@
 import java.time.Instant;
-import java.util.Serializable;
+import java.io.Serializable;
 
 public class Transaction implements Serializable {
   private int sender;
