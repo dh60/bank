@@ -23,7 +23,7 @@ public class User {
   }
   
   public boolean authenticate(String username, String password) {
-    if (this.username == username && this.password == password) {
+    if (username.equals(this.username) && password.equals(this.password)) {
       return true;
     }
     return false;
