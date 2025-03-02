@@ -12,4 +12,8 @@ public class Transaction {
     this.amount = amount;
     date = Instant.now().toString();
   }
+  
+  public String toString() {
+    return "From: " + sender + "\tTo: " + recipient + "\tAmount: $" + amount + "\tDate: " + date;
+  }
 }
