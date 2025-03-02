@@ -2,13 +2,13 @@ import java.time.Instant;
 
 public class Transaction {
   private int sender;
-  private int receiver;
+  private int recipient;
   private double amount;
   private String date;
   
-  public Transaction(int sender, int receiver, double amount) {
+  public Transaction(int sender, int recipient, double amount) {
     this.sender = sender;
-    this.receiver = receiver;
+    this.recipient = recipient;
     this.amount = amount;
     date = Instant.now().toString();
   }
