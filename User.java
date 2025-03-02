@@ -27,6 +27,10 @@ public class User {
     return username;
   }
   
+  public String getName() {
+    return name;
+  }
+  
   public boolean authenticate(String username, String password) {
     if (username.equals(this.username) && password.equals(this.password)) {
       return true;

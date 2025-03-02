@@ -15,9 +15,9 @@ public class Bank implements Serializable {
   }
   
   public User authenticate(String username, String password) {
-    for (User user : users) {
-      if (username.equals(user.getUsername()) && user.authenticate(username, password)) {
-        return user;
+    for (User curUser : users) {
+      if (username.equals(curUser.getUsername()) && curUser.authenticate(username, password)) {
+        return curUser;
       }
     }
     return null;

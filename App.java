@@ -5,6 +5,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class App extends Application {
+    Bank bank = new Bank();
+    User currentUser;
+
   public static void main(String[] args) {
     launch(args);
   }
@@ -23,19 +26,27 @@ public class App extends Application {
     
     // Layout the elements
     HBox buttonBox = new HBox(10, loginButton, registerButton);
-    VBox vbox = new VBox(10, usernameLabel, usernameField, passwordLabel, passwordField, buttonBox, statusLabel);
-    Scene scene = new Scene(vbox, 640, 480);
+    VBox vbox = new VBox(10,
+      usernameLabel, usernameField,
+      passwordLabel, passwordField,
+      buttonBox, statusLabel
+    );
+    Scene scene = new Scene(vbox, 320, 160);
     primaryStage.setScene(scene);
     primaryStage.show();
     
     // Creating a dummy Bank for testing purposes.
-    Bank bank = new Bank();
     
-    // EventHandler for the loginButton. Sends to the User authenticate method, sets status to True or False.
-    //loginButton.setOnAction(e -> {
-    //  boolean loginResult = testUser.authenticate(usernameField.getText(), passwordField.getText());
-    //  statusLabel.setText(String.valueOf(loginResult));
-    //});
+    // EventHandler for the loginButton. Sends to the Bank authenticate method, sets status to True or False.
+    loginButton.setOnAction(e -> {
+      currentUser = bank.authenticate(usernameField.getText(), passwordField.getText());
+      if (currentUser != null) {
+        statusLabel.setText("Login successful! Welcome, " + currentUser.getName());
+      }
+      else {
+        statusLabel.setText("Username or Password is incorrect. Please try again.");
+      }
+    });
     
     // EventHandler for the Registration. CREATES A NEW STAGE.
     registerButton.setOnAction(e -> {
@@ -68,8 +79,8 @@ public class App extends Application {
         submitButton
       );
 
-      // Create scene and put it on register stage.
-      Scene registerScene = new Scene(registerVbox, 640, 480);
+      // Create window for Registration and put the layout in it.
+      Scene registerScene = new Scene(registerVbox, 320, 420);
       registerStage.setScene(registerScene);
       registerStage.show();
       
