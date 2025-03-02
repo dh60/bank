@@ -23,6 +23,10 @@ public class User {
     accounts.add(chequing);
   }
   
+  public String getUsername() {
+    return username;
+  }
+  
   public boolean authenticate(String username, String password) {
     if (username.equals(this.username) && password.equals(this.password)) {
       return true;

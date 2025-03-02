@@ -13,4 +13,13 @@ public class Bank implements Serializable {
   public void addUser(User newUser) {
     users.add(newUser);
   }
+  
+  public User authenticate(String username, String password) {
+    for (User user : users) {
+      if (username.equals(user.getUsername()) && user.authenticate(username, password)) {
+        return user;
+      }
+    }
+    return null;
+  }
 }
