@@ -31,7 +31,7 @@ public class App extends Application {
     // Creating a dummy account for testing purposes.
     User testUser = new User("dh", "greatpassword", "Daniel Hogarth", "d.h@unb.ca", "555-555-5555", "265 Regent St.");
     
-    // EventHandler for the loginButton. Sends to the User authenticate method.
+    // EventHandler for the loginButton. Sends to the User authenticate method, sets status to True or False.
     loginButton.setOnAction(e -> {
       boolean loginResult = testUser.authenticate(usernameField.getText(), passwordField.getText());
       statusLabel.setText(String.valueOf(loginResult));

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Serializable;
+import java.io.Serializable;
 
 public class Bank implements Serializable {
   private ArrayList<User> users;
@@ -8,5 +8,9 @@ public class Bank implements Serializable {
   public Bank() {
     users = new ArrayList<>();
     accounts = new ArrayList<>();
+  }
+  
+  public void addUser(User newUser) {
+    users.add(newUser);
   }
 }
