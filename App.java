@@ -31,7 +31,7 @@ public class App extends Application {
                 passwordLabel, passwordField,
                 buttonBox, statusLabel
         );
-        Scene scene = new Scene(vbox, 320, 160);
+        Scene scene = new Scene(vbox, 320, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -41,7 +41,6 @@ public class App extends Application {
         loginButton.setOnAction(e -> {
             currentUser = bank.authenticate(usernameField.getText(), passwordField.getText());
             if (currentUser != null) {
-                statusLabel.setText("Login successful! Welcome, " + currentUser.getName());
                 showAccountPage(primaryStage);
                 primaryStage.close();
             } else {
