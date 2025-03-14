@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 public class User {
+  private static final long serialVersionUID = 1L; // for compatibility across serialised versions of classes
   private String username;
-  private String password;
+  private transient String password; // not serialized for security purposes
   private String name;
   private String email;
   private String phone;
