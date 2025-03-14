@@ -32,4 +32,8 @@ public class Account implements Serializable {
     }
     return 0;
   }
+  
+  public ArrayList<Transaction> getTransactions() {
+  	return transactions;
+  }
 }

@@ -3,6 +3,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
+import java.util.List;
+import java.util.ArrayList;
 
 public class App extends Application {
     Bank bank = new Bank();
@@ -31,16 +34,15 @@ public class App extends Application {
                 passwordLabel, passwordField,
                 buttonBox, statusLabel
         );
-        Scene scene = new Scene(vbox, 320, 200);
+        Scene scene = new Scene(vbox, 320, 160);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        // Creating a dummy Bank for testing purposes.
 
         // EventHandler for the loginButton. Sends to the Bank authenticate method, sets status to True or False.
         loginButton.setOnAction(e -> {
             currentUser = bank.authenticate(usernameField.getText(), passwordField.getText());
             if (currentUser != null) {
+                statusLabel.setText("Login successful! Welcome, " + currentUser.getName());
                 showAccountPage(primaryStage);
                 primaryStage.close();
             } else {
@@ -104,10 +106,11 @@ public class App extends Application {
         Stage accountStage = new Stage();
         accountStage.setTitle("Account Page");
         Label welcomeLabel = new Label("Welcome, " + currentUser.getName());
-        Label balanceLabel = new Label("Balance: $" + String.format("%.2f", currentUser.balance()));
+        Label balanceLabel = new Label("Balance: $" + String.format("%.2f", currentUser.getAccount().get(0).getBalance()));
         Button depositButton = new Button("Deposit");
         Button withdrawButton = new Button("Withdraw");
         Button transferButton = new Button("Transfer");
+        Button transactionHistoryButton = new Button("Transaction History");
         Button logoutButton = new Button("Log Out");
 
         // Logout action
@@ -116,12 +119,47 @@ public class App extends Application {
             start(new Stage()); // Restart login page
         });
 
-        // Layout
-        VBox layout = new VBox(10, welcomeLabel, balanceLabel, depositButton, withdrawButton, transferButton, logoutButton);
-        layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
+        transactionHistoryButton.setOnAction(e -> {
+            if (currentUser == null) {
+                // Handle error
+                return;
+            }
 
+            Stage transactionStage = new Stage();
+            transactionStage.setTitle("Transaction History");
+
+            ListView<String> transactionListView = new ListView<>();
+            Button loadMoreButton = new Button("Load More");
+            loadTransactions(transactionListView, 5);
+
+            VBox transactionVbox = new VBox(10, transactionListView, loadMoreButton);
+            Scene transactionScene = new Scene(transactionVbox, 400, 300);
+            transactionStage.setScene(transactionScene);
+            transactionStage.show();
+
+            loadMoreButton.setOnAction(event -> {
+                loadTransactions(transactionListView, transactionListView.getItems().size() + 5);
+            });
+        });
+
+        // Layout
+        VBox layout = new VBox(10, welcomeLabel, balanceLabel, depositButton, withdrawButton, transferButton, transactionHistoryButton, logoutButton);
+        layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout, 300, 250);
         accountStage.setScene(scene);
         accountStage.show();
+    }
+
+    private void loadTransactions(ListView<String> transactionListView, int count) {
+        transactionListView.getItems().clear();
+
+        if (currentUser != null && !currentUser.getAccount().isEmpty()) {
+            Account account = currentUser.getAccount().get(0);
+            ArrayList<Transaction> transactions = account.getTransactions();
+
+            for (int i = Math.max(0, transactions.size() - count); i < transactions.size(); i++) {
+                transactionListView.getItems().add(transactions.get(i).toString());
+            }
+        }
     }
 }
