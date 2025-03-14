@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Account implements Serializable {
-  private static int nextID = 1;
+  private static final long serialVersionUID = 1L;
   private final int accountID;
   private double balance;
   private ArrayList<Transaction> transactions;
