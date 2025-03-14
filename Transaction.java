@@ -15,6 +15,6 @@ public class Transaction implements Serializable {
   }
   
   public String toString() {
-    return "From: " + sender + "\tTo: " + recipient + "\tAmount: $" + amount + "\tDate: " + date;
+    return String.format("Transaction from:%d, Amount:$%.2f, Date:%s",sender,recipient,amount,date);
   }
 }

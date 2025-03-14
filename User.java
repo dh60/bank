@@ -9,6 +9,7 @@ public class User {
   private String phone;
   private String address;
   private ArrayList<Account> accounts;
+  private Account chequing;
   
   public User(String username, String password, String name,
               String email, String phone, String address) {
@@ -19,7 +20,7 @@ public class User {
     this.phone = phone;
     this.address = address;
     accounts = new ArrayList<>();
-    Account chequing = new Account();
+    chequing = new Account();
     accounts.add(chequing);
   }
   
@@ -30,11 +31,11 @@ public class User {
   public String getName() {
     return name;
   }
+  public double balance(){
+    return chequing.getBalance();
+  }
   
   public boolean authenticate(String username, String password) {
-    if (username.equals(this.username) && password.equals(this.password)) {
-      return true;
-    }
-    return false;
+    return username.equals(this.username) && password.equals(this.password);
   }
 }

@@ -23,13 +23,18 @@ public class Account implements Serializable {
   
   public void deposit(double amount) {
     balance += amount;
+    transactions.add(new Transaction(-1, accountID, amount));
   }
   
   public double withdraw(double amount) {
     if ((balance - amount) >= 0) { 
       balance -= amount;
+      transactions.add(new Transaction(accountID,-1, amount));
       return amount;
     }
     return 0;
+  }
+  public ArrayList<Transaction> getTransaction(){
+    return transactions;
   }
 }
