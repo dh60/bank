@@ -23,6 +23,19 @@ public class AccountTest {
         
         System.out.println(account.getTransactions());
         
+        //savings accounts and interest calculation\
+        int interest=2;
+        SavingsAccount savings=new SavingsAccount(2);
+        savings.deposit(1000);
+        System.out.println(savings.getInterest());
+        savings.calculateInterest();
+        System.out.println(savings.getBalance());
+
+        System.out.println("changing the interest to 3");
+        savings.setInterest(3);
+        savings.calculateInterest();
+        System.out.println(savings.getBalance());
+
     }
     
 }
