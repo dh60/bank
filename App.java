@@ -25,7 +25,7 @@ public class App extends Application {
         grid.setVgap(10);
         grid.setPadding(new javafx.geometry.Insets(25, 25, 25, 25));
 
-        grid.setStyle("-fx-background-color: #fde0e0;");
+        grid.setStyle("-fx-background-color: #ffffff;");
 
         // Add a logo or title
         Text title = new Text("Welcome to CS2043 Bank");
