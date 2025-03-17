@@ -23,7 +23,7 @@ public class RegistrationForm {
         registerGrid.setHgap(10);
         registerGrid.setVgap(10);
         registerGrid.setPadding(new Insets(25, 25, 25, 25));
-        registerGrid.setStyle("-fx-background-color: #f4f4f4;");
+        registerGrid.setStyle("-fx-background-color: #ffffff;");
 
         // Registration title
         Text registerTitle = new Text("Create a New Account");
