@@ -5,6 +5,7 @@ public class User {
   private static final long serialVersionUID = 1L; // for compatibility across serialised versions of classes
   private String username;
   private transient String password; // not serialized for security purposes
+  private String gender;
   private String name;
   private String email;
   private String phone;
@@ -15,6 +16,7 @@ public class User {
               String email, String phone, String address) {
     this.username = username;
     this.password = password;
+	this.gender = gender;
     this.name = name;
     this.email = email;
     this.phone = phone;
@@ -29,6 +31,10 @@ public class User {
   }
   
   public String getName() {
+    return name;
+  }
+  
+  public String getGender() {
     return name;
   }
   
