@@ -29,7 +29,8 @@ public class Account implements Serializable {
   public double withdraw(double amount) {
     if ((balance - amount) >= 0) { 
       balance -= amount;
-      transactions.add(new Transaction(accountID, 0, amount));//sender is 0 because we are the sender
+      transactions.add(new Transaction(accountID, 0, amount));//sender is 0 because we are the reciever
+      
 
       return amount;
     }
