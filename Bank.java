@@ -1,14 +1,12 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.io.Serializable;
 
 public class Bank implements Serializable {
   private static final long serialVersionUID = 1L;
   private ArrayList<User> users;
-  private ArrayList<Account> accounts;
   
   public Bank() {
     users = new ArrayList<>();
-    accounts = new ArrayList<>();
   }
   
   public void addUser(User newUser) {
@@ -22,5 +20,32 @@ public class Bank implements Serializable {
       }
     }
     return null;
+  }
+  
+  public ArrayList<User> getUsers() {
+    return users;
+  }
+
+  public ArrayList<Account> getAccounts() {
+    ArrayList<Account> allAccounts = new ArrayList<>();
+    for (User user : users) {
+      allAccounts.addAll(user.getAccounts());
+    }
+    return allAccounts;
+  }
+  
+  public static Bank load(String filename) throws IOException, ClassNotFoundException {
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+      Bank bank = (Bank) ois.readObject();
+      System.out.println("Data loaded! Users: " + bank.getUsers().size() + " Accounts: " + bank.getAccounts().size());
+      return bank;
+    }
+  }
+  
+  public void save(String filename) throws IOException {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+      oos.writeObject(this);
+      System.out.println("Data saved! Users: " + users.size() + " Accounts: " + getAccounts().size());
+    }
   }
 }
