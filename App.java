@@ -41,7 +41,7 @@ public class App extends Application {
 
         TextField usernameField = new TextField();
         usernameField.setStyle("-fx-background-color: #ffffff;"+
-                                "-fx-border-color: #cccccc;");
+                "-fx-border-color: #cccccc;");
         grid.add(usernameField, 1, 1);
 
         // Password field
@@ -51,22 +51,22 @@ public class App extends Application {
         grid.add(passwordLabel, 0, 2);
 
         PasswordField passwordField = new PasswordField();
-        passwordField.setStyle("-fx-background-color: #ffffff;"+
-                                "-fx-border-color: #cccccc;");
+        passwordField.setStyle("-fx-background-color: #fffff;"+
+                "-fx-border-color: #cccccc;");
         grid.add(passwordField, 1, 2);
 
         // Login button
         Button loginButton = new Button("Login");
-        loginButton.setStyle("-fx-background-color: #FF0000;" + 
-                             "-fx-text-fill: white; -fx-font-size: 16;"+ 
-                             "-fx-font-weight: bold;");
+        loginButton.setStyle("-fx-background-color: #FF0000;" +
+                "-fx-text-fill: white; -fx-font-size: 16;"+
+                "-fx-font-weight: bold;");
         grid.add(loginButton, 1, 3);
 
         // Register button
         Button registerButton = new Button("Register");
-        registerButton.setStyle("-fx-background-color: #FF0000;" + 
-                                "-fx-text-fill: white; -fx-font-size: 16;"+ 
-                                "-fx-font-weight: bold;");
+        registerButton.setStyle("-fx-background-color: #FF0000;" +
+                "-fx-text-fill: white; -fx-font-size: 16;"+
+                "-fx-font-weight: bold;");
         grid.add(registerButton, 1, 4);
 
         // Status label for login feedback
@@ -127,48 +127,48 @@ public class App extends Application {
         // Buttons for account actions
         Button depositButton = new Button("Deposit");
         depositButton.setStyle( "-fx-background-color: #0078d7;"+
-                                "-fx-text-fill: white;"+
-                                "-fx-font-size: 14; "+
-                                "-fx-font-weight: bold;"+
-                                "-fx-border-radius: 5;");
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
         grid.add(depositButton, 0, 2);
 
         Button withdrawButton = new Button("Withdraw");
         withdrawButton.setStyle( "-fx-background-color: #0078d7;"+
-                                 "-fx-text-fill: white;"+
-                                 "-fx-font-size: 14; "+
-                                 "-fx-font-weight: bold;"+
-                                 "-fx-border-radius: 5;");
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
         grid.add(withdrawButton, 1, 2);
 
         Button transferButton = new Button("Transfer");
         transferButton.setStyle( "-fx-background-color: #0078d7;"+
-                                 "-fx-text-fill: white;"+
-                                 "-fx-font-size: 14; "+
-                                 "-fx-font-weight: bold;"+
-                                 "-fx-border-radius: 5;");
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
         grid.add(transferButton, 0, 3);
 
         Button transactionHistoryButton = new Button("Transaction History");
         transactionHistoryButton.setStyle( "-fx-background-color: #0078d7;"+
-                                            "-fx-text-fill: white;"+
-                                            "-fx-font-size: 14; "+
-                                            "-fx-font-weight: bold;"+
-                                            "-fx-border-radius: 5;");
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
         grid.add(transactionHistoryButton, 1, 3);
 
         Button logoutButton = new Button("Log Out");
         logoutButton.setStyle( "-fx-background-color: #FF0000;"+
-                               "-fx-text-fill: white;"+
-                               "-fx-font-size: 14; "+
-                               "-fx-font-weight: bold;"+
-                               "-fx-border-radius: 5;");
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
         grid.add(logoutButton, 0, 4, 2, 1);
 
         // Logout action
         logoutButton.setOnAction(e -> {
             accountStage.close();
-            start(new Stage()); // Restart login page
+            start(new Stage());
         });
 
         // Set the scene and show the stage
