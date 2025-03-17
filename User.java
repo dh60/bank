@@ -35,7 +35,7 @@ public class User {
   }
   
   public String getGender() {
-    return name;
+    return gender;
   }
   
   public boolean authenticate(String username, String password) {
