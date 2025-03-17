@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Account implements Serializable {
-  private static final long serialVersionUID = 1L;
   private static int nextID = 1;
   private final int accountID;
   private double balance;
@@ -24,14 +23,29 @@ public class Account implements Serializable {
   
   public void deposit(double amount) {
     balance += amount;
+    transactions.add(new Transaction(0, accountID, amount));//sender is 0 because we are the sender
   }
   
   public double withdraw(double amount) {
     if ((balance - amount) >= 0) { 
       balance -= amount;
+      transactions.add(new Transaction(accountID, 0, amount));//sender is 0 because we are the sender
+
       return amount;
     }
     return 0;
+  }
+  public boolean transfer(Account recipient,double amount){
+    if(amount>0 && this.balance>=amount){
+      this.balance-=amount;
+      recipient.balance+=amount;
+
+      Transaction transaction=new Transaction(this.accountID, recipient.accountID, amount);
+      this.transactions.add(transaction);
+            recipient.transactions.add(transaction);
+            return true;
+    }
+    return false;
   }
   
   public ArrayList<Transaction> getTransactions() {
