@@ -171,9 +171,28 @@ public class App extends Application {
             start(new Stage());
         });
 
+        //transaction history 
+        transactionHistoryButton.setOnAction(e->{
+           showTransactionHistory(accountStage);
+        });
+
         // Set the scene and show the stage
         Scene scene = new Scene(grid, 400, 300);
         accountStage.setScene(scene);
         accountStage.show();
+    }
+    private void showTransactionHistory(Stage primaryStage){
+        Stage historyStage=new Stage();
+        historyStage.setTitle("Transaction History");
+
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new javafx.geometry.Insets(25, 25, 25, 25));
+        grid.setStyle("-fx-background-color: #f4f4f4;");
+        Scene scene = new Scene(grid, 400, 300);
+        historyStage.setScene(scene);
+        historyStage.show();
     }
 }
