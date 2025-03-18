@@ -6,10 +6,10 @@ import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class App extends Application {
-    Bank bank = new Bank();
+    Bank bank;
     User currentUser;
 
     public static void main(String[] args) {
@@ -17,6 +17,12 @@ public class App extends Application {
     }
 
     public void start(Stage primaryStage) {
+        try {
+            bank = Bank.load("data.ser");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("data.ser not found, creating new database.");
+            bank = new Bank();
+        }
         primaryStage.setTitle("CS2043 Bank - Login");
 
         GridPane grid = new GridPane();
@@ -94,6 +100,16 @@ public class App extends Application {
             RegistrationForm registrationForm = new RegistrationForm(bank);
             registrationForm.show();
         });
+        
+        // SAVES UPON CLOSING
+        primaryStage.setOnCloseRequest(e -> {
+            try {
+                bank.save("data.ser");
+            } catch (IOException ex) {
+                System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
+            }
+        });
+
 
         // Set the scene and show the stage
         Scene scene = new Scene(grid, 400, 350);
@@ -119,7 +135,7 @@ public class App extends Application {
         grid.add(welcomeText, 0, 0, 2, 1);
 
         // Balance display
-        Label balanceLabel = new Label("Balance: $" + String.format("%.2f", currentUser.getAccount().get(0).getBalance()));
+        Label balanceLabel = new Label("Balance: $" + String.format("%.2f", currentUser.getAccounts().get(0).getBalance()));
         balanceLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
         balanceLabel.setTextFill(Color.DARKSLATEGRAY);
         grid.add(balanceLabel, 0, 1, 2, 1);
@@ -167,8 +183,22 @@ public class App extends Application {
 
         // Logout action
         logoutButton.setOnAction(e -> {
+            try {
+                bank.save("data.ser");
+            } catch (IOException ex) {
+                System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
+            }
             accountStage.close();
             start(new Stage());
+        });
+        
+        // SAVE BANK ACCOUNT BEFORE CLOSING.
+        primaryStage.setOnCloseRequest(e -> {
+            try {
+                bank.save("data.ser");
+            } catch (IOException ex) {
+                System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
+            }
         });
 
         //transaction history 

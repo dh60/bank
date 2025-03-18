@@ -1,10 +1,10 @@
 import java.util.ArrayList;
-import java.io.Serializable;
+import java.io.*;
 
-public class User {
-  private static final long serialVersionUID = 1L; // for compatibility across serialised versions of classes
+public class User implements Serializable {
+  private static final long serialVersionUID = 1L;
   private String username;
-  private transient String password; // not serialized for security purposes
+  private String password;
   private String gender;
   private String name;
   private String email;
@@ -16,7 +16,7 @@ public class User {
               String email, String phone, String address) {
     this.username = username;
     this.password = password;
-	this.gender = gender;
+	  this.gender = gender;
     this.name = name;
     this.email = email;
     this.phone = phone;
@@ -45,7 +45,7 @@ public class User {
     return false;
   }
   
-  public ArrayList<Account> getAccount() {
+  public ArrayList<Account> getAccounts() {
   	return accounts;
   }
 
