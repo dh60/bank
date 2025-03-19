@@ -231,18 +231,30 @@ public class App extends Application {
         grid.setPadding(new javafx.geometry.Insets(25, 25, 25, 25));
         grid.setStyle("-fx-background-color: #f4f4f4;");
     
-        // Get transaction list
         ArrayList<Transaction> transactions = currentUser.getAccounts().get(0).getTransactions();
-    
-        // Create ListView
         ListView<String> transactionList = new ListView<>();
-        
-        // Populate ListView with transaction details
         for (Transaction t : transactions) {
             transactionList.getItems().add(t.toString()); // Assuming Transaction has a toString() method
         }
-    
+
         grid.add(transactionList, 0, 0);
+        Button closeButton = new Button("Close");
+        closeButton.setStyle( "-fx-background-color: #0078d7;"+
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
+        grid.add(closeButton, 0, 2);
+
+        closeButton.setOnAction(e->{
+            try {
+                bank.save("data.ser");
+            } catch (IOException ex) {
+                System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
+            }
+            historyStage.close();
+            start(new Stage());
+        });
     
         Scene scene = new Scene(grid, 400, 300);
         historyStage.setScene(scene);
