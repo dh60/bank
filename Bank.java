@@ -23,4 +23,8 @@ public class Bank implements Serializable {
     }
     return null;
   }
+  
+  public ArrayList<User> getUsers() {
+  	return users;
+  }
 }
