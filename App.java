@@ -40,7 +40,7 @@ public class App extends Application {
         grid.setVgap(10);
         grid.setPadding(new javafx.geometry.Insets(25, 25, 25, 25));
 
-        grid.setStyle("-fx-background-color: #ffffff;");
+        grid.setStyle("-fx-background-color: #FFFFFF;");
 
         // Add a logo or title
         Text title = new Text("Welcome to CS2043 Bank");
@@ -55,8 +55,8 @@ public class App extends Application {
         grid.add(usernameLabel, 0, 1);
 
         TextField usernameField = new TextField();
-        usernameField.setStyle("-fx-background-color: #ffffff;"+
-                "-fx-border-color: #cccccc;");
+        usernameField.setStyle("-fx-background-color: #FFFFFF;"+
+                "-fx-border-color: #CCCCCC;");
         grid.add(usernameField, 1, 1);
 
         // Password field
@@ -66,7 +66,7 @@ public class App extends Application {
         grid.add(passwordLabel, 0, 2);
 
         PasswordField passwordField = new PasswordField();
-        passwordField.setStyle("-fx-background-color: #fffff;"+
+        passwordField.setStyle("-fx-background-color: #FFFFF;"+
                 "-fx-border-color: #cccccc;");
         grid.add(passwordField, 1, 2);
 
@@ -253,7 +253,6 @@ public class App extends Application {
                 System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
             }
             historyStage.close();
-            start(new Stage());
         });
     
         Scene scene = new Scene(grid, 400, 300);
