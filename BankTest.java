@@ -16,5 +16,15 @@ public class BankTest {
         bank.addUser(mockUser);
         assert bank.getUsers().size() == 1 : "Test failed: User not added successfully";
     }
+	
+	private static void testAddUserNull() {
+        try {
+            Bank bank = new Bank();
+            bank.addUser(null);
+            assert false : "Test failed: Null user was added";
+        } catch (IllegalArgumentException e) {
+            assert e.getMessage().equals("User cannot be null") : "Test failed: Incorrect exception message";
+        }
+    }
 
 }
