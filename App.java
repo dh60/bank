@@ -7,6 +7,15 @@ import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
+
+import javafx.scene.control.ListView;
+
+import javafx.scene.text.Text; // Add this line
+
+
+//import org.w3c.dom.Text;
 
 public class App extends Application {
     Bank bank;
@@ -211,18 +220,33 @@ public class App extends Application {
         accountStage.setScene(scene);
         accountStage.show();
     }
-    private void showTransactionHistory(Stage primaryStage){
-        Stage historyStage=new Stage();
+    private void showTransactionHistory(Stage primaryStage) {
+        Stage historyStage = new Stage();
         historyStage.setTitle("Transaction History");
-
+    
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new javafx.geometry.Insets(25, 25, 25, 25));
         grid.setStyle("-fx-background-color: #f4f4f4;");
+    
+        // Get transaction list
+        ArrayList<Transaction> transactions = currentUser.getAccounts().get(0).getTransactions();
+    
+        // Create ListView
+        ListView<String> transactionList = new ListView<>();
+        
+        // Populate ListView with transaction details
+        for (Transaction t : transactions) {
+            transactionList.getItems().add(t.toString()); // Assuming Transaction has a toString() method
+        }
+    
+        grid.add(transactionList, 0, 0);
+    
         Scene scene = new Scene(grid, 400, 300);
         historyStage.setScene(scene);
         historyStage.show();
     }
+    
 }
