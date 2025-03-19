@@ -3,7 +3,7 @@ public class BankTest {
         testAddUserSuccessfully();
         testAddUserNull();
         testAddDuplicateUser();
-       // testAuthenticateSuccess();
+		testAuthenticateSuccess();
        // testAuthenticateFailWrongPassword();
        // testAuthenticateNonExistentUser();
        // testAuthenticateWithNullValues();
@@ -38,6 +38,14 @@ public class BankTest {
         } catch (IllegalArgumentException e) {
             assert e.getMessage().equals("User already exists") : "Test failed: Incorrect exception message";
         }
+    }
+	
+	    private static void testAuthenticateSuccess() {
+        Bank bank = new Bank();
+        User mockUser = new User("abcde", "123456", "abcde",
+              "abcde@gmail.com", "506 1234567", "123 Bd st");
+        bank.addUser(mockUser);
+        assert bank.authenticate("abcde", "123456") != null : "Test Successful: Authentication successful";
     }
 
 
