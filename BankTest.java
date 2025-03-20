@@ -4,7 +4,7 @@ public class BankTest {
         testAddUserNull();
         testAddDuplicateUser();
 		testAuthenticateSuccess();
-       // testAuthenticateFailWrongPassword();
+		testAuthenticateFailWrongPassword();
        // testAuthenticateNonExistentUser();
        // testAuthenticateWithNullValues();
         System.out.println("All tests executed.");
