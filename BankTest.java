@@ -59,6 +59,6 @@ public class BankTest {
     private static void testAuthenticateNonExistentUser() {
         Bank bank = new Bank();
         assert bank.authenticate("nonexistent", "password") == null : "Test failed: Non-existent user should not authenticate";
-    
+    }
 
 }
