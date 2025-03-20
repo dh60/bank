@@ -6,7 +6,7 @@ public class BankTest {
 		testAuthenticateSuccess();
 		testAuthenticateFailWrongPassword();
 		testAuthenticateNonExistentUser();
-       // testAuthenticateWithNullValues();
+		testAuthenticateWithNullValues();
         System.out.println("All tests executed.");
     }
 	private static void testAddUserSuccessfully() {
@@ -59,6 +59,13 @@ public class BankTest {
     private static void testAuthenticateNonExistentUser() {
         Bank bank = new Bank();
         assert bank.authenticate("nonexistent", "password") == null : "Test failed: Non-existent user should not authenticate";
+    }
+	
+	    private static void testAuthenticateWithNullValues() {
+        Bank bank = new Bank();
+        assert bank.authenticate(null, "password") == null : "Test failed: Null username should not authenticate";
+        assert bank.authenticate("user1", null) == null : "Test failed: Null password should not authenticate";
+        assert bank.authenticate(null, null) == null : "Test failed: Both null values should not authenticate";
     }
 
 }
