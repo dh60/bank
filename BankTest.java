@@ -48,5 +48,12 @@ public class BankTest {
         assert bank.authenticate("abcde", "123456") != null : "Test Successful: Authentication successful";
     }
 
+	    private static void testAuthenticateFailWrongPassword() {
+        Bank bank = new Bank();
+        User mockUser = new User("abcde", "123456", "abcde",
+              "abcde@gmail.com", "506 1234567", "123 Bd st");
+        bank.addUser(mockUser);
+        assert bank.authenticate("abcde", "wrong123") == null : "Test failed: Authentication should have failed";
+    }
 
 }
