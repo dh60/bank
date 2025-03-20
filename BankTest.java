@@ -5,7 +5,7 @@ public class BankTest {
         testAddDuplicateUser();
 		testAuthenticateSuccess();
 		testAuthenticateFailWrongPassword();
-       // testAuthenticateNonExistentUser();
+		testAuthenticateNonExistentUser();
        // testAuthenticateWithNullValues();
         System.out.println("All tests executed.");
     }
@@ -55,5 +55,10 @@ public class BankTest {
         bank.addUser(mockUser);
         assert bank.authenticate("abcde", "wrong123") == null : "Test failed: Authentication should have failed";
     }
+
+    private static void testAuthenticateNonExistentUser() {
+        Bank bank = new Bank();
+        assert bank.authenticate("nonexistent", "password") == null : "Test failed: Non-existent user should not authenticate";
+    
 
 }
