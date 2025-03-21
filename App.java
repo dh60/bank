@@ -139,23 +139,28 @@ public class App extends Application {
         // Welcome message
         Text welcomeText = new Text("Welcome, " + currentUser.getName());
         welcomeText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        welcomeText.setFill(Color.DARKBLUE);
+        welcomeText.setFill(Color.RED);
         grid.add(welcomeText, 0, 0, 2, 1);
 
         // Balance display
         Label balanceLabel = new Label("Balance: $" + String.format("%.2f", currentUser.getAccounts().get(0).getBalance()));
         balanceLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
-        balanceLabel.setTextFill(Color.DARKSLATEGRAY);
+        balanceLabel.setTextFill(Color.RED);
         grid.add(balanceLabel, 0, 1, 2, 1);
 
         // Buttons for account actions
         Button depositButton = new Button("Deposit");
+        depositButton.setOnAction(e -> deposit(depositField.getText()));
         depositButton.setStyle( "-fx-background-color: #0078d7;"+
                 "-fx-text-fill: white;"+
                 "-fx-font-size: 14; "+
                 "-fx-font-weight: bold;"+
                 "-fx-border-radius: 5;");
         grid.add(depositButton, 0, 2);
+
+        TextField depositField = new TextField();
+        depositField.setPromptText("Enter deposit amount");
+        grid.add(depositField, 1, 2);
 
         Button withdrawButton = new Button("Withdraw");
         withdrawButton.setStyle( "-fx-background-color: #0078d7;"+
@@ -253,6 +258,22 @@ public class App extends Application {
             }
             historyStage.close();
         });
+
+        private void deposit(String amount) {
+            try {
+                double depositAmount = Double.parseDouble(amount);
+                if (depositAmount > 0) {
+                    currentUser.getAccounts().get(0).deposit(depositAmount);
+                    balanceLabel.setText("Balance: $" + String.format("%.2f", currentUser.getAccounts().get(0).getBalance()));
+                    showMessage("Deposit Successful", "Added $" + depositAmount + " to your account.");
+                } else {
+                    showMessage("Invalid Amount", "Please enter a positive amount.");
+                }
+            } catch (NumberFormatException ex) {
+                showMessage("Invalid Input", "Please enter a valid number.");
+            }
+        }
+
     
         Scene scene = new Scene(grid, 400, 300);
         historyStage.setScene(scene);
