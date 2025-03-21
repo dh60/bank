@@ -9,6 +9,4 @@ javac --module-path $PATH_TO_FX --add-modules javafx.controls *.java
 To run the app:
 java --module-path $PATH_TO_FX --add-modules javafx.controls App
 
-Currently, the only functionality is creating accounts and logging in to existing accounts. Data is not currently saved between program runs.
-
-The ReadDriver and WriteDriver are proof of concept for how we will serialize the files to save information permanately. They do not currently serve any function.
+Currently, the only functionality is creating accounts and logging in to existing accounts. All data is saved between runs.
