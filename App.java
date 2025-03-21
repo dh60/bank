@@ -5,16 +5,13 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
+// Add this line
 import javafx.scene.text.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+import javafx.scene.text.Text;
 import javafx.scene.control.ListView;
-
-import javafx.scene.text.Text; // Add this line
-
-
 //import org.w3c.dom.Text;
 
 public class App extends Application {
@@ -190,6 +187,28 @@ public class App extends Application {
                 "-fx-border-radius: 5;");
         grid.add(logoutButton, 0, 4, 2, 1);
 
+
+        Button savingsAccountButton=new Button("Savings Account ?");
+        savingsAccountButton.setStyle( "-fx-background-color: #FF0000;"+
+                "-fx-text-fill: white;"+
+                "-fx-font-size: 14; "+
+                "-fx-font-weight: bold;"+
+                "-fx-border-radius: 5;");
+        grid.add(savingsAccountButton, 0, 9, 9, 9);
+        savingsAccountButton.setOnAction(e->{
+            SavingsAccount savings = new SavingsAccount(2.0);
+            currentUser.getAccounts().add(savings);
+            // Show a confirmation message
+            System.out.println("Savings Account created successfully!");
+            System.out.println("New Account ID: " + savings.getID());
+
+            // Update the balance display to show the total balance of all accounts
+            double totalBalance = 0;
+            for (Account account : currentUser.getAccounts()) {
+                totalBalance += account.getBalance();
+            }
+            balanceLabel.setText("Total Balance: $" + String.format("%.2f", totalBalance));
+        });
         // Logout action
         logoutButton.setOnAction(e -> {
             try {
