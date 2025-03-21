@@ -212,22 +212,6 @@ public class App extends Application {
                 System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
             }
         });
-        // depositButton.setOnAction(e->{
-        //     TextField amountField = new TextField(); 
-        //     amountField.setPromptText("Enter amount");
-        //     try {
-        //         double amount = Double.parseDouble(amountField.getText());
-        //         if (amount > 0) {
-        //             account.deposit(amount);
-        //             updateBalance();
-        //         } else {
-        //             showAlert("Enter a positive amount.");
-        //         }
-        //     } catch (NumberFormatException ex) {
-        //         showAlert("Invalid number format.");
-        //     }
-        //     amountField.clear();
-        // });
 
         //transaction history 
         transactionHistoryButton.setOnAction(e->{
