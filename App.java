@@ -5,14 +5,17 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
+// Add this line
 import javafx.scene.text.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//import javax.swing.text.html.ListView;
 
+import javafx.scene.text.Text;
 import javafx.scene.control.ListView;
 
-import javafx.scene.text.Text; // Add this line
+//import org.w3c.dom.Text;
 
 
 //import org.w3c.dom.Text;
@@ -209,6 +212,22 @@ public class App extends Application {
                 System.err.println("ERROR: Bank not saved!!! " + ex.getMessage());
             }
         });
+        // depositButton.setOnAction(e->{
+        //     TextField amountField = new TextField(); 
+        //     amountField.setPromptText("Enter amount");
+        //     try {
+        //         double amount = Double.parseDouble(amountField.getText());
+        //         if (amount > 0) {
+        //             account.deposit(amount);
+        //             updateBalance();
+        //         } else {
+        //             showAlert("Enter a positive amount.");
+        //         }
+        //     } catch (NumberFormatException ex) {
+        //         showAlert("Invalid number format.");
+        //     }
+        //     amountField.clear();
+        // });
 
         //transaction history 
         transactionHistoryButton.setOnAction(e->{
