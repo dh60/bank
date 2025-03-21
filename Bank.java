@@ -23,6 +23,7 @@ public class Bank implements Serializable {
   }
   
   public ArrayList<User> getUsers() {
+<<<<<<< HEAD
     return users;
   }
 
@@ -47,5 +48,8 @@ public class Bank implements Serializable {
       oos.writeObject(this);
       System.out.println("Data saved! Users: " + users.size() + " Accounts: " + getAccounts().size());
     }
+=======
+  	return users;
+>>>>>>> 8ba8f714227f0cd62170f201165277d7e038f1eb
   }
 }
