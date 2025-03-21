@@ -163,12 +163,17 @@ public class App extends Application {
         grid.add(depositField, 1, 2);
 
         Button withdrawButton = new Button("Withdraw");
+        withdrawButton.setOnAction(e -> withdraw(withdrawField.getText()));
         withdrawButton.setStyle( "-fx-background-color: #0078d7;"+
                 "-fx-text-fill: white;"+
                 "-fx-font-size: 14; "+
                 "-fx-font-weight: bold;"+
                 "-fx-border-radius: 5;");
-        grid.add(withdrawButton, 1, 2);
+        grid.add(withdrawButton, 0, 3);
+
+        TextField withdrawField = new TextField();
+        withdrawField.setPromptText("Enter withdraw amount");
+        grid.add(withdrawField, 1, 3);
 
         Button transferButton = new Button("Transfer");
         transferButton.setStyle( "-fx-background-color: #0078d7;"+
@@ -266,6 +271,25 @@ public class App extends Application {
                     currentUser.getAccounts().get(0).deposit(depositAmount);
                     balanceLabel.setText("Balance: $" + String.format("%.2f", currentUser.getAccounts().get(0).getBalance()));
                     showMessage("Deposit Successful", "Added $" + depositAmount + " to your account.");
+                } else {
+                    showMessage("Invalid Amount", "Please enter a positive amount.");
+                }
+            } catch (NumberFormatException ex) {
+                showMessage("Invalid Input", "Please enter a valid number.");
+            }
+        }
+
+        private void withdraw(String amount) {
+            try {
+                double withdrawAmount = Double.parseDouble(amount);
+                if (withdrawAmount > 0) {
+                    double withdrawn = currentUser.getAccounts().get(0).withdraw(withdrawAmount);
+                    if (withdrawn > 0) {
+                        balanceLabel.setText("Balance: $" + String.format("%.2f", currentUser.getAccounts().get(0).getBalance()));
+                        showMessage("Withdrawal Successful", "Removed $" + withdrawAmount + " from your account.");
+                    } else {
+                        showMessage("Insufficient Funds", "You cannot withdraw $" + withdrawAmount);
+                    }
                 } else {
                     showMessage("Invalid Amount", "Please enter a positive amount.");
                 }
