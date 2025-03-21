@@ -23,13 +23,13 @@ public class Account implements Serializable {
   
   public void deposit(double amount) {
     balance += amount;
-    transactions.add(new Transaction(0, accountID, amount));//sender is 0 because we are the sender
+    transactions.add(new Transaction(0, accountID, amount));
   }
   
   public double withdraw(double amount) {
     if ((balance - amount) >= 0) { 
       balance -= amount;
-      transactions.add(new Transaction(accountID, 0, amount));//sender is 0 because we are the reciever
+      transactions.add(new Transaction(accountID, 0, amount));
       
 
       return amount;

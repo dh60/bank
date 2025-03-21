@@ -5,20 +5,15 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
-// Add this line
+
 import javafx.scene.text.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//import javax.swing.text.html.ListView;
+
 
 import javafx.scene.text.Text;
 import javafx.scene.control.ListView;
-
-//import org.w3c.dom.Text;
-
-
-//import org.w3c.dom.Text;
 
 public class App extends Application {
     Bank bank;
@@ -75,6 +70,7 @@ public class App extends Application {
 
         // Login button
         Button loginButton = new Button("Login");
+        loginButton.setOnAction(e -> login(usernameField.getText(), passwordField.getText()));
         loginButton.setStyle("-fx-background-color: #FF0000;" +
                 "-fx-text-fill: white; -fx-font-size: 16;"+
                 "-fx-font-weight: bold;");
@@ -94,8 +90,8 @@ public class App extends Application {
         grid.add(statusLabel, 1, 5);
 
         // EventHandler for the loginButton
-        loginButton.setOnAction(e -> {
-            currentUser = bank.authenticate(usernameField.getText(), passwordField.getText());
+        private void login(String username, String password) {
+            currentUser = bank.authenticate(username, password);
             if (currentUser != null) {
                 statusLabel.setText("Login successful! Welcome, " + currentUser.getName());
                 statusLabel.setTextFill(Color.GREEN);
@@ -105,7 +101,7 @@ public class App extends Application {
                 statusLabel.setText("Username or Password is incorrect. Please try again.");
                 statusLabel.setTextFill(Color.RED);
             }
-        });
+        }
 
         // EventHandler for the Register button
         registerButton.setOnAction(e -> {
