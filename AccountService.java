@@ -28,5 +28,18 @@ public class AccountService {
         }
         return false;
     }
+	
+	public boolean transfer(Account fromAccount, Account toAccount, double amount) {
+        boolean success = fromAccount.transfer(toAccount, amount);
+        if (success) {
+            try {
+                bank.saveToFile("data.ser");
+                System.out.println("Transfer successful: " + amount + " from " + fromAccount.getID() + " to " + toAccount.getID());
+            } catch (IOException e) {
+                System.out.println("Transfer failed to save: " + e.getMessage());
+            }
+        }
+        return success;
+    }
 
 }
