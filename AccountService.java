@@ -41,5 +41,20 @@ public class AccountService {
         }
         return success;
     }
+	
+	public boolean transferById(Account fromAccount, int toAccountId, double amount) {
+        Account toAccount = findAccountById(toAccountId);
+        if (toAccount != null) {
+            boolean success = transfer(fromAccount, toAccount, amount);
+            if (success) {
+                System.out.println("TransferById: " + amount + " from " + fromAccount.getID() + " to " + toAccountId);
+            } else {
+                System.out.println("TransferById failed: Insufficient funds or error");
+            }
+            return success;
+        }
+        System.out.println("TransferById failed: Account ID " + toAccountId + " not found");
+        return false;
+    }
 
 }
