@@ -45,18 +45,7 @@ public class LoginView {
                 new Alert(Alert.AlertType.ERROR, "Please enter both username and password").show();
             } else {
                 User user = bankService.login(username, password);
-                if (user != null) {
-                    ChequingView chequingView = new ChequingView(bankService, user, stage);
-                    chequingView.show();
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Incorrect username or password").show();
-                }
             }
-        });
-
-        registerButton.setOnAction(e -> {
-            RegistrationView regView = new RegistrationView(bankService, stage);
-            regView.show();
         });
 
         Scene scene = new Scene(layout, 350, 250);
