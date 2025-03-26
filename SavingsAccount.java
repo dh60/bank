@@ -1,16 +1,12 @@
-public class SavingsAccount extends Account{
+public class SavingsAccount extends Account {
     private double interestRate;
-    public SavingsAccount(double interestRate){
-        this.interestRate=interestRate;
+
+    public SavingsAccount(int id) {  
+        super(id);  
+        interestRate = 4.0; 
     }
-    public void calculateInterest(){
-        double interest=getBalance()*(interestRate/100);
-        deposit(interest);
-    }
-    public double getInterest(){
+
+    public double getInterestRate() {
         return interestRate;
-    }
-    public void setInterest(double interestRate){
-        this.interestRate=interestRate;
     }
 }

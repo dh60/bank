@@ -1,51 +1,49 @@
-import java.io.*;
+
+
 import java.util.ArrayList;
+import java.io.*;
 
 public class Bank implements Serializable {
-  private static final long serialVersionUID = 1L;
   private ArrayList<User> users;
-  
+  private int nextID;  
+
   public Bank() {
     users = new ArrayList<>();
+    nextID = 100; 
   }
-  
-  public void addUser(User newUser) {
-    users.add(newUser);
-  }
-  
-  public User authenticate(String username, String password) {
-    for (User curUser : users) {
-      if (username.equals(curUser.getUsername()) && curUser.authenticate(username, password)) {
-        return curUser;
-      }
-    }
-    return null;
-  }
-  
+
   public ArrayList<User> getUsers() {
     return users;
   }
 
-  public ArrayList<Account> getAccounts() {
-    ArrayList<Account> allAccounts = new ArrayList<>();
-    for (User user : users) {
-      allAccounts.addAll(user.getAccounts());
-    }
-    return allAccounts;
+  public int getNextID() {
+    return nextID++;
   }
-  
-  public static Bank load(String filename) throws IOException, ClassNotFoundException {
-    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-      Bank bank = (Bank) ois.readObject();
-      System.out.println("Data loaded! Users: " + bank.getUsers().size() + " Accounts: " + bank.getAccounts().size());
+
+  public void saveToFile(String filename) throws IOException {
+    try {
+      File file = new File(filename);
+      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+      out.writeObject(this);
+      out.close();
+      System.out.println("Data saved to: " + file.getAbsolutePath());
+    } catch (IOException e) {
+      System.out.println("Error saving data to " + filename + ": " + e.getMessage());
+      throw e;
+    }
+  }
+
+  public static Bank loadFromFile(String filename) {
+    try {
+      File file = new File(filename);
+      ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+      Bank bank = (Bank) in.readObject();
+      in.close();
+      System.out.println("Data loaded from: " + file.getAbsolutePath());
       return bank;
-    }
-  }
-  
-  public void save(String filename) throws IOException {
-    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-      oos.writeObject(this);
-      System.out.println("Data saved! Users: " + users.size() + " Accounts: " + getAccounts().size());
+    } catch (IOException | ClassNotFoundException e) {
+      System.out.println("Could not load " + filename + ", starting new bank");
+      return new Bank();
     }
   }
 }
