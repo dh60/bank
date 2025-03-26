@@ -56,5 +56,16 @@ public class AccountService {
         System.out.println("TransferById failed: Account ID " + toAccountId + " not found");
         return false;
     }
-
+	
+	private Account findAccountById(int accountId) {
+        for (User user : bank.getUsers()) {
+            for (Account account : user.getAccounts()) {
+                if (account.getID() == accountId) {
+                    return account;
+                }
+            }
+        }
+        return null;
+    }
+	
 }
