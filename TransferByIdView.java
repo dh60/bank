@@ -20,6 +20,8 @@ public class TransferByIdView {
 		Stage stage = new Stage();
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
-
+		
+		Label idLabel = new Label("Enter Account ID:");
+		Label amountLabel = new Label("Enter Amount:");
 	}
 }
