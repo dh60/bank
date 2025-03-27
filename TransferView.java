@@ -21,7 +21,6 @@ public class TransferView {
 	public void show() {
         Stage stage = new Stage();
 
-        // Main layout with padding and centered alignment
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.CENTER);
