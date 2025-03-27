@@ -59,6 +59,12 @@ public class TransferView {
                 }
             }
         });
+		
+        Scene scene = new Scene(layout, 250, 200);
+        stage.setScene(scene);
+        stage.setTitle("Transfer");
+        stage.show();
+
 
 	}
 
