@@ -88,4 +88,4 @@ public class RegistrationView {
         newStage.setTitle("Bank Registration");
         newStage.show();
     }
-}+
+}
