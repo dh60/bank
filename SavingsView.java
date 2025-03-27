@@ -77,6 +77,7 @@ public class SavingsView {
         transferButton.setOnAction(e -> new TransferView(accountService, savings, user.getAccounts().get(0), this).show());
         requestButton.setOnAction(e -> new RequestView(accountService, user.getAccounts().get(0), savings, this).show());
         allTransactionsButton.setOnAction(e -> showAllTransactions(savings));
+        chequingButton.setOnAction(e -> new ChequingView(bankService, user, stage).show());
         logoutButton.setOnAction(e -> new LoginView(bankService, stage).show());
 
         Scene scene = new Scene(mainLayout, 400, 500);
@@ -84,4 +85,18 @@ public class SavingsView {
         stage.setTitle("Savings Dashboard");
         stage.show();
     }
+
+    public void update(Account account) {
+        Label balanceLabel = (Label) stage.getScene().lookup("#balanceLabel");
+        if (balanceLabel != null) {
+            balanceLabel.setText("Balance: $" + account.getBalance());
+        }
+        ListView<String> transactionList = (ListView<String>) stage.getScene().lookup("#transactionList");
+        if (transactionList != null) {
+            updateTransactions(transactionList, account);
+        }
+    }
+
+
+
 }
