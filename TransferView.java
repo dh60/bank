@@ -37,6 +37,28 @@ public class TransferView {
         submitButton.setMinWidth(100);
 		
         layout.getChildren().addAll(titleLabel, amountLabel, amountField, submitButton);
+		
+        submitButton.setOnAction(e -> {
+            String input = amountField.getText().trim();
+            if (input.isEmpty()) {
+                new Alert(Alert.AlertType.ERROR, "Please enter an amount!").show();
+            } else {
+                try {
+                    double amount = Double.parseDouble(input);
+                    if (amount <= 0) {
+                        new Alert(Alert.AlertType.ERROR, "Amount must be greater than zero!").show();
+                    } else if (accountService.transfer(fromAccount, toAccount, amount)) {
+                        new Alert(Alert.AlertType.INFORMATION, "Transfer successful!").show();
+                        updateParent();
+                        stage.close();
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Not enough money in the account!").show();
+                    }
+                } catch (NumberFormatException ex) {
+                    new Alert(Alert.AlertType.ERROR, "Invalid amount! Use numbers only (e.g., 50.00).").show();
+                }
+            }
+        });
 
 	}
 
