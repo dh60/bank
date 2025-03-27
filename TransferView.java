@@ -24,6 +24,15 @@ public class TransferView {
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.CENTER);
+		
+        Label titleLabel = new Label("Transfer Money");
+        titleLabel.setStyle("-fx-font-size: 16; -fx-font-weight: bold;");
+		
+        Label amountLabel = new Label("Enter Amount:");
+        TextField amountField = new TextField();
+        amountField.setPromptText("e.g., 50.00");
+        amountField.setMaxWidth(150);
+
 	}
 
 }
