@@ -53,12 +53,13 @@ public class TransferByIdView {
         stage.setTitle("Transfer by ID");
         stage.show();
 	}
-}
 
-private void updateParent() {
-    if (parentView instanceof ChequingView) {
-		((ChequingView) parentView).update(fromAccount);
-        System.out.println("UI updated for account " + fromAccount.getID());
+
+    private void updateParent() {
+        if (parentView instanceof ChequingView) {
+            ((ChequingView) parentView).update(fromAccount);
+            System.out.println("UI updated for account " + fromAccount.getID());
+        }
     }
 }
 
