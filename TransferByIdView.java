@@ -27,5 +27,7 @@ public class TransferByIdView {
 		TextField amountField = new TextField();
 		Button submitButton = new Button("Submit");
 
-	}
+		layout.getChildren().addAll(idLabel, idField, amountLabel, amountField, submitButton);
+
+	});
 }
