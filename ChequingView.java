@@ -1,3 +1,5 @@
+import javax.swing.text.html.ListView;
+
 import javafx.geometry.Insets; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
@@ -20,6 +22,76 @@ public class ChequingView {
         Account chequing = user.getAccounts().get(0);
         VBox mainLayout = new VBox(20); 
         mainLayout.setPadding(new Insets(15)); 
-        VBox infoBox = new VBox(5); 
-    }    
+        VBox infoBox = new VBox(5);
+        infoBox.setPadding(new Insets(10)); 
+        infoBox.setStyle("-fx-border-color: lightgray; -fx-border-width: 1;"); 
+
+        Label titleLabel = new Label("Chequing Account"); 
+        titleLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold;"); 
+
+        Label nameLabel = new Label("Name: " + user.getName()); 
+        Label idLabel = new Label("Account ID: " + chequing.getID()); 
+        Label balanceLabel = new Label("Balance: $" + chequing.getBalance()); 
+        balanceLabel.setId("balanceLabel"); 
+        balanceLabel.setStyle("-fx-font-size: 16;"); 
+
+        infoBox.getChildren().addAll(titleLabel, nameLabel, idLabel, balanceLabel); 
+        infoBox.setAlignment(Pos.TOP_LEFT); 
+
+        VBox transactionBox = new VBox(5); 
+        Label transactionsLabel = new Label("Recent Transactions"); 
+        transactionsLabel.setStyle("-fx-font-size: 14; -fx-font-weight: bold;"); 
+
+        ListView<String> transactionList = new ListView<>(); 
+        transactionList.setPrefHeight(150); 
+        updateTransactions(transactionList, chequing); 
+        transactionBox.getChildren().addAll(transactionsLabel, transactionList); 
+
+        HBox buttonBox = new HBox(10); 
+        buttonBox.setAlignment(Pos.CENTER); 
+        Button depositButton = new Button("Deposit"); 
+        depositButton.setMinWidth(100); 
+        Button withdrawButton = new Button("Withdraw"); 
+        withdrawButton.setMinWidth(100); 
+        Button transferButton = new Button("To Savings"); 
+        transferButton.setMinWidth(100); 
+        Button transferByIdButton = new Button("To Other ID"); 
+        transferByIdButton.setMinWidth(100); 
+        Button allTransactionsButton = new Button("All Transactions"); 
+        allTransactionsButton.setMinWidth(100); 
+        Button savingsButton = new Button("Go to Savings"); 
+        savingsButton.setMinWidth(100); 
+        Button logoutButton = new Button("Logout"); 
+        logoutButton.setMinWidth(100); 
+  
+        buttonBox.getChildren().addAll(depositButton, withdrawButton, transferButton, transferByIdButton, 
+                allTransactionsButton, savingsButton, logoutButton); 
+        mainLayout.getChildren().addAll(infoBox, transactionBox, buttonBox); 
+
+        depositButton.setOnAction(e -> new DepositView(accountService, chequing, this).show()); 
+        withdrawButton.setOnAction(e -> new WithdrawView(accountService, chequing, this).show()); 
+        transferButton.setOnAction(e -> new TransferView(accountService, chequing, user.getAccounts().get(1), this).show()); 
+        transferByIdButton.setOnAction(e -> new TransferByIdView(accountService, chequing, this).show()); 
+        allTransactionsButton.setOnAction(e -> showAllTransactions(chequing)); 
+        savingsButton.setOnAction(e -> new SavingsView(bankService, user, stage).show()); 
+        logoutButton.setOnAction(e -> new LoginView(bankService, stage).show()); 
+
+        Scene scene = new Scene(mainLayout, 400, 500); 
+        stage.setScene(scene); 
+        stage.setTitle("Chequing Dashboard"); 
+        stage.show(); 
+    }
+    public void update(Account account) { 
+        Label balanceLabel = (Label) stage.getScene().lookup("#balanceLabel"); 
+        if (balanceLabel != null) { 
+            balanceLabel.setText("Balance: $" + account.getBalance()); 
+            System.out.println("ChequingView: Updated balance to $" + account.getBalance() + " for ID " + account.getID()); 
+        } else { 
+            System.out.println("ChequingView: balanceLabel not found!"); 
+        } 
+        ListView<String> transactionList = (ListView<String>) stage.getScene().lookup("#transactionList"); 
+        if (transactionList != null) { 
+            updateTransactions(transactionList, account); 
+        } 
+    } 
 }
