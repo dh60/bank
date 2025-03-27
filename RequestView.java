@@ -43,4 +43,9 @@ public class RequestView {
         stage.setTitle("Request from Chequing"); 
         stage.show();  
     }
+    private void updateParent() { 
+        if (parentView instanceof SavingsView) { 
+            ((SavingsView) parentView).update(toAccount); 
+        } 
+    } 
 }
