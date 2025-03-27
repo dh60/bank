@@ -35,6 +35,8 @@ public class TransferView {
 		
         Button submitButton = new Button("Transfer");
         submitButton.setMinWidth(100);
+		
+        layout.getChildren().addAll(titleLabel, amountLabel, amountField, submitButton);
 
 	}
 
