@@ -93,5 +93,18 @@ public class ChequingView {
         if (transactionList != null) { 
             updateTransactions(transactionList, account); 
         } 
+    }
+    private void updateTransactions(ListView<String> list, Account account) { 
+
+        list.getItems().clear(); 
+
+        for (Transaction t : account.getLatestTransactions()) { 
+
+            list.getItems().add(t.toString(account.getID()));  // Pass account ID for perspective 
+
+        } 
+
+        list.setId("transactionList"); 
+
     } 
 }
