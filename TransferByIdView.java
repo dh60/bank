@@ -29,5 +29,23 @@ public class TransferByIdView {
 
 		layout.getChildren().addAll(idLabel, idField, amountLabel, amountField, submitButton);
 
-	});
+		submitButton.setOnAction(e -> {
+            try {
+                int toAccountId = Integer.parseInt(idField.getText());
+                double amount = Double.parseDouble(amountField.getText());
+                if (amount <= 0) {
+                    new Alert(Alert.AlertType.ERROR, "Amount must be greater than zero!").show();
+                } else if (!accountService.transferById(fromAccount, toAccountId, amount)) {
+                    new Alert(Alert.AlertType.ERROR, "Transfer failed: Check ID or balance.").show();
+                } else {
+                    System.out.println("TransferByIdView: Transfer completed, updating UI");
+                    updateParent();
+                    new Alert(Alert.AlertType.INFORMATION, "Transfer successful!").show();
+                    stage.close();
+                }
+            } catch (NumberFormatException ex) {
+                new Alert(Alert.AlertType.ERROR, "Please enter a valid ID and amount.").show();
+            }
+        });
+	}
 }
