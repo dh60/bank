@@ -17,5 +17,9 @@ public class TransferByIdView {
 
     public void show() {
 		
+		Stage stage = new Stage();
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(10));
+
 	}
 }
