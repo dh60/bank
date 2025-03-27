@@ -15,5 +15,7 @@ public class TransferByIdView {
         this.parentView = parentView;
     }
 
-    
+    public void show() {
+		
+	}
 }
