@@ -64,8 +64,14 @@ public class TransferView {
         stage.setScene(scene);
         stage.setTitle("Transfer");
         stage.show();
-
-
 	}
+		
+	private void updateParent() {
+        if (parentView instanceof ChequingView) {
+            ((ChequingView) parentView).update(fromAccount);
+        } else if (parentView instanceof SavingsView) {
+            ((SavingsView) parentView).update(fromAccount);
+        }
+    }
 
 }
