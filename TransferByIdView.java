@@ -25,6 +25,7 @@ public class TransferByIdView {
 		TextField idField = new TextField();
 		Label amountLabel = new Label("Enter Amount:");
 		TextField amountField = new TextField();
+		Button submitButton = new Button("Submit");
 
 	}
 }
