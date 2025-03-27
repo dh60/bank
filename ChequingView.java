@@ -106,5 +106,23 @@ public class ChequingView {
 
         list.setId("transactionList"); 
 
-    } 
+    }
+    private void showAllTransactions(Account account) { 
+        Stage newStage = new Stage(); 
+        VBox transactionLayout = new VBox(10); 
+        transactionLayout.setPadding(new Insets(10)); 
+
+        Label title = new Label("All Transactions"); 
+        title.setStyle("-fx-font-size: 16; -fx-font-weight: bold;"); 
+        ListView<String> allList = new ListView<>(); 
+        for (Transaction t : account.getTransactions()) { 
+            allList.getItems().add(t.toString(account.getID())); 
+        } 
+        allList.setPrefHeight(200); 
+        transactionLayout.getChildren().addAll(title, allList); 
+        Scene scene = new Scene(transactionLayout, 350, 250); 
+        newStage.setScene(scene); 
+        newStage.setTitle("All Transactions"); 
+        newStage.show(); 
+    }
 }

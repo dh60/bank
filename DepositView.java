@@ -64,5 +64,4 @@ public class DepositView {
         stage.show();
     }
 
-    }
 }

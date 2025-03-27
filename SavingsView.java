@@ -84,3 +84,4 @@ public class SavingsView {
         stage.setTitle("Savings Dashboard");
         stage.show();
     }
+}
