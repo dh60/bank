@@ -32,6 +32,9 @@ public class TransferView {
         TextField amountField = new TextField();
         amountField.setPromptText("e.g., 50.00");
         amountField.setMaxWidth(150);
+		
+        Button submitButton = new Button("Transfer");
+        submitButton.setMinWidth(100);
 
 	}
 
