@@ -22,6 +22,9 @@ public class TransferByIdView {
         layout.setPadding(new Insets(10));
 		
 		Label idLabel = new Label("Enter Account ID:");
+		TextField idField = new TextField();
 		Label amountLabel = new Label("Enter Amount:");
+		TextField amountField = new TextField();
+
 	}
 }
