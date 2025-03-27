@@ -16,4 +16,24 @@ public class WithdrawView {
         this.parentView = parentView;
     }
 
-   
+    public void show() {
+        Stage stage = new Stage();
+        
+        VBox layout = new VBox(15);
+        layout.setPadding(new Insets(20));
+        layout.setAlignment(Pos.CENTER);
+
+        Label titleLabel = new Label("Withdraw Money");
+        titleLabel.setStyle("-fx-font-size: 16; -fx-font-weight: bold;");
+
+        Label amountLabel = new Label("Amount:");
+        TextField amountField = new TextField();
+        amountField.setPromptText("Enter Amount");
+        amountField.setMaxWidth(150);
+
+        Button submitButton = new Button("Withdraw");
+        submitButton.setMinWidth(100);
+
+
+        layout.getChildren().addAll(titleLabel, amountLabel, amountField, submitButton);
+    }
