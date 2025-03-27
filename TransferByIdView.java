@@ -47,5 +47,10 @@ public class TransferByIdView {
                 new Alert(Alert.AlertType.ERROR, "Please enter a valid ID and amount.").show();
             }
         });
+		
+	    Scene scene = new Scene(layout, 200, 200);
+        stage.setScene(scene);
+        stage.setTitle("Transfer by ID");
+        stage.show();
 	}
 }
