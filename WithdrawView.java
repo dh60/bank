@@ -37,3 +37,4 @@ public class WithdrawView {
 
         layout.getChildren().addAll(titleLabel, amountLabel, amountField, submitButton);
     }
+}
