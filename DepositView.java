@@ -58,10 +58,18 @@ public class DepositView {
             }
         });
 
+        // Set up the scene
         Scene scene = new Scene(layout, 250, 200);
         stage.setScene(scene);
         stage.setTitle("Deposit");
         stage.show();
     }
 
+    private void updateParent() {
+        if (parentView instanceof ChequingView) {
+            ((ChequingView) parentView).update(account);
+        } else if (parentView instanceof SavingsView) {
+            ((SavingsView) parentView).update(account);
+        }
+    }
 }
