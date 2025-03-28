@@ -76,7 +76,7 @@ public class ChequingView {
         savingsButton.setOnAction(e -> new SavingsView(bankService, user, stage).show()); 
         logoutButton.setOnAction(e -> new LoginView(bankService, stage).show()); 
 
-        Scene scene = new Scene(mainLayout, 400, 500); 
+        Scene scene = new Scene(mainLayout, 800, 360); 
         stage.setScene(scene); 
         stage.setTitle("Chequing Dashboard"); 
         stage.show(); 
