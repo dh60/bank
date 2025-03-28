@@ -16,7 +16,8 @@ public class ChequingView {
         this.accountService = new AccountService(bankService.getBank()); 
         this.user = user; 
         this.stage = stage; 
-    } 
+    }
+    
     public void show() { 
         Account chequing = user.getAccounts().get(0);
         VBox mainLayout = new VBox(20); 
@@ -80,6 +81,7 @@ public class ChequingView {
         stage.setTitle("Chequing Dashboard"); 
         stage.show(); 
     }
+    
     public void update(Account account) { 
         Label balanceLabel = (Label) stage.getScene().lookup("#balanceLabel"); 
         if (balanceLabel != null) { 
@@ -93,19 +95,15 @@ public class ChequingView {
             updateTransactions(transactionList, account); 
         } 
     }
+    
     private void updateTransactions(ListView<String> list, Account account) { 
-
         list.getItems().clear(); 
-
         for (Transaction t : account.getLatestTransactions()) { 
-
             list.getItems().add(t.toString(account.getID()));  // Pass account ID for perspective 
-
         } 
-
         list.setId("transactionList"); 
-
     }
+    
     private void showAllTransactions(Account account) { 
         Stage newStage = new Stage(); 
         VBox transactionLayout = new VBox(10); 
