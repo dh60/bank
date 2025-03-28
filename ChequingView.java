@@ -1,12 +1,11 @@
-import javax.swing.text.html.ListView;
-
 import javafx.geometry.Insets; 
 import javafx.geometry.Pos; 
 import javafx.scene.Scene; 
 import javafx.scene.control.*; 
 import javafx.scene.layout.HBox; 
 import javafx.scene.layout.VBox; 
-import javafx.stage.Stage; 
+import javafx.stage.Stage;
+
 public class ChequingView {
     private BankService bankService; 
     private AccountService accountService; 
@@ -42,7 +41,7 @@ public class ChequingView {
         Label transactionsLabel = new Label("Recent Transactions"); 
         transactionsLabel.setStyle("-fx-font-size: 14; -fx-font-weight: bold;"); 
 
-        ListView<String> transactionList = new ListView<>(); 
+        ListView<String> transactionList = new ListView<String>(); 
         transactionList.setPrefHeight(150); 
         updateTransactions(transactionList, chequing); 
         transactionBox.getChildren().addAll(transactionsLabel, transactionList); 
@@ -114,7 +113,7 @@ public class ChequingView {
 
         Label title = new Label("All Transactions"); 
         title.setStyle("-fx-font-size: 16; -fx-font-weight: bold;"); 
-        ListView<String> allList = new ListView<>(); 
+        ListView<String> allList = new ListView<String>(); 
         for (Transaction t : account.getTransactions()) { 
             allList.getItems().add(t.toString(account.getID())); 
         } 
