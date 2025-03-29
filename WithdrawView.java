@@ -7,12 +7,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class WithdrawView {
-    private AccountService accountService;
     private Account account;
     private ChequingView parentView;
 
-    public WithdrawView(AccountService accountService, Account account, ChequingView parentView) {
-        this.accountService = accountService;
+    public WithdrawView(Account account, ChequingView parentView) {
         this.account = account;
         this.parentView = parentView;
     }
@@ -53,7 +51,7 @@ public class WithdrawView {
                     double amount = Double.parseDouble(amountText);
                     if (amount <= 0) {
                         new Alert(Alert.AlertType.ERROR, "Amount must be greater than zero!").show();
-                    } else if (accountService.withdraw(account, amount)) {
+                    } else if (account.withdraw(amount) > 0) {
                         parentView.update(account);
                         new Alert(Alert.AlertType.INFORMATION, "Withdrawal successful!").show();
                         stage.close();

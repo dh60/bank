@@ -7,14 +7,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ChequingView {
-    private BankService bankService; 
-    private AccountService accountService; 
+    private Bank bank; 
     private User user; 
     private Stage stage;
-    public ChequingView(BankService bankService, User user, Stage stage) { 
-        this.bankService = bankService; 
-        this.accountService = new AccountService(bankService.getBank()); 
-        this.user = user; 
+    
+    public ChequingView(Bank bank, User user, Stage stage) { 
+        this.bank = bank;
+        this.user = user;
         this.stage = stage; 
     }
     
@@ -68,18 +67,18 @@ public class ChequingView {
                 allTransactionsButton, savingsButton, logoutButton); 
         mainLayout.getChildren().addAll(infoBox, transactionBox, buttonBox); 
 
-        depositButton.setOnAction(e -> new DepositView(accountService, chequing, this).show()); 
-        withdrawButton.setOnAction(e -> new WithdrawView(accountService, chequing, this).show()); 
-        transferButton.setOnAction(e -> new TransferView(accountService, chequing, user.getAccounts().get(1), this).show()); 
-        transferByIdButton.setOnAction(e -> new TransferByIdView(accountService, chequing, this).show()); 
+        depositButton.setOnAction(e -> new DepositView(chequing, this).show()); 
+        withdrawButton.setOnAction(e -> new WithdrawView(chequing, this).show()); 
+        transferButton.setOnAction(e -> new TransferView(chequing, user.getAccounts().get(1), this).show()); 
+        transferByIdButton.setOnAction(e -> new TransferByIdView(bank, chequing, this).show()); 
         allTransactionsButton.setOnAction(e -> showAllTransactions(chequing)); 
-        savingsButton.setOnAction(e -> new SavingsView(bankService, user, stage).show()); 
-        logoutButton.setOnAction(e -> new LoginView(bankService, stage).show()); 
+        savingsButton.setOnAction(e -> new SavingsView(bank, user, stage).show()); 
+        logoutButton.setOnAction(e -> new LoginView(bank, stage).show()); 
 
         Scene scene = new Scene(mainLayout, 800, 360); 
         stage.setScene(scene); 
         stage.setTitle("Chequing Dashboard"); 
-        stage.show(); 
+        stage.show();
     }
     
     public void update(Account account) { 
@@ -98,8 +97,8 @@ public class ChequingView {
     
     private void updateTransactions(ListView<String> list, Account account) { 
         list.getItems().clear(); 
-        for (Transaction t : account.getLatestTransactions()) { 
-            list.getItems().add(t.toString(account.getID()));  // Pass account ID for perspective 
+        for (Transaction t : account.getTransactions()) { 
+            list.getItems().add(t.toString());
         } 
         list.setId("transactionList"); 
     }
@@ -113,7 +112,7 @@ public class ChequingView {
         title.setStyle("-fx-font-size: 16; -fx-font-weight: bold;"); 
         ListView<String> allList = new ListView<String>(); 
         for (Transaction t : account.getTransactions()) { 
-            allList.getItems().add(t.toString(account.getID())); 
+            allList.getItems().add(t.toString()); 
         } 
         allList.setPrefHeight(200); 
         transactionLayout.getChildren().addAll(title, allList); 

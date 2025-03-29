@@ -5,11 +5,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class RegistrationView {
-    private BankService bankService;
+    private Bank bank;
     private Stage stage;
 
-    public RegistrationView(BankService bankService, Stage stage) {
-        this.bankService = bankService;
+    public RegistrationView(Bank bank, Stage stage) {
+        this.bank = bank;
         this.stage = stage;
     }
 
@@ -54,7 +54,14 @@ public class RegistrationView {
         // Add all elements to layout
         layout.getChildren().addAll(titleLabel, usernameField, passwordField, nameField,
                 emailField, phoneField, addressField, submitButton);
-
+        
+        // Set up the scene
+        Scene scene = new Scene(layout, 350, 400);
+        Stage newStage = new Stage();
+        newStage.setScene(scene);
+        newStage.setTitle("Bank Registration");
+        newStage.show();
+        
         // Submit button action
         submitButton.setOnAction(e -> {
             String username = usernameField.getText();
@@ -70,10 +77,10 @@ public class RegistrationView {
                 new Alert(Alert.AlertType.ERROR, "All fields must be filled").show();
             } else {
                 try {
-                    bankService.register(username, password, name, email, phone, address);
-                    new Alert(Alert.AlertType.INFORMATION, "Registration successful! Please log in.").show();
-                    stage.close();
-                    LoginView loginView = new LoginView(bankService, stage);
+                    User newUser = new User(username, password, name, email, phone, address);
+                    bank.addUser(newUser);
+                    newStage.close();
+                    LoginView loginView = new LoginView(bank, stage);
                     loginView.show();
                 } catch (Exception ex) {
                     new Alert(Alert.AlertType.ERROR, "Error during registration. Try again.").show();
@@ -81,11 +88,5 @@ public class RegistrationView {
             }
         });
 
-        // Set up the scene
-        Scene scene = new Scene(layout, 350, 400);
-        Stage newStage = new Stage();
-        newStage.setScene(scene);
-        newStage.setTitle("Bank Registration");
-        newStage.show();
     }
 }

@@ -5,16 +5,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LoginView {
-    private BankService bankService;
+    private Bank bank;
     private Stage stage;
 
-    public LoginView(BankService bankService, Stage stage) {
-        this.bankService = bankService;
+    public LoginView(Bank bank, Stage stage) {
+        this.bank = bank;
         this.stage = stage;
     }
 
     public void show() {
-        // Create layout with padding for better spacing
+        // Create layout with padding for better spacing f
         VBox layout = new VBox(15);
         layout.setPadding(new Insets(20)); // Add space around the edges
 
@@ -48,9 +48,9 @@ public class LoginView {
             if (username.isEmpty() || password.isEmpty()) {
                 new Alert(Alert.AlertType.ERROR, "Please enter both username and password").show();
             } else {
-                User user = bankService.login(username, password);
+                User user = bank.authenticate(username, password);
                 if (user != null) {
-                    ChequingView chequingView = new ChequingView(bankService, user, stage);
+                    ChequingView chequingView = new ChequingView(bank, user, stage);
                     chequingView.show();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Incorrect username or password").show();
@@ -60,7 +60,7 @@ public class LoginView {
 
         // Register button action
         registerButton.setOnAction(e -> {
-            RegistrationView regView = new RegistrationView(bankService, stage);
+            RegistrationView regView = new RegistrationView(bank, stage);
             regView.show();
         });
 

@@ -6,13 +6,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TransferView {
-    private AccountService accountService;
     private Account fromAccount;
     private Account toAccount;
     private Object parentView;
 
-    public TransferView(AccountService accountService, Account fromAccount, Account toAccount, Object parentView) {
-        this.accountService = accountService;
+    public TransferView(Account fromAccount, Account toAccount, Object parentView) {
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.parentView = parentView;
@@ -47,7 +45,7 @@ public class TransferView {
                     double amount = Double.parseDouble(input);
                     if (amount <= 0) {
                         new Alert(Alert.AlertType.ERROR, "Amount must be greater than zero!").show();
-                    } else if (accountService.transfer(fromAccount, toAccount, amount)) {
+                    } else if (fromAccount.transfer(toAccount, amount)) {
                         new Alert(Alert.AlertType.INFORMATION, "Transfer successful!").show();
                         updateParent();
                         stage.close();

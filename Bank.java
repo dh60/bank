@@ -1,49 +1,83 @@
-
-
-import java.util.ArrayList;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Bank implements Serializable {
   private ArrayList<User> users;
-  private int nextID;  
-
-  public Bank() {
+  private transient String filename;
+  
+  public Bank(String filename) {
+    this.filename = filename;
     users = new ArrayList<>();
-    nextID = 100; 
   }
-
+  
+  public void addUser(User newUser) {
+    users.add(newUser);
+    for (Account account : newUser.getAccounts()) {
+      account.setOnChangeCallback(this::save);
+    }
+    save();
+  }
+  
+  public User authenticate(String username, String password) {
+    for (User curUser : users) {
+      if (username.equals(curUser.getUsername()) && curUser.authenticate(username, password)) {
+        return curUser;
+      }
+    }
+    return null;
+  }
+  
   public ArrayList<User> getUsers() {
     return users;
   }
-
-  public int getNextID() {
-    return nextID++;
+  
+  public Account getAccountByID(int id) {
+    for (User user : users) {
+        for (Account account : user.getAccounts()) {
+            if (account.getID() == id) {
+                return account;
+            }
+        }
+    }
+    return null;
   }
-
-  public void saveToFile(String filename) throws IOException {
-    try {
-      File file = new File(filename);
-      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-      out.writeObject(this);
-      out.close();
-      System.out.println("Data saved to: " + file.getAbsolutePath());
-    } catch (IOException e) {
-      System.out.println("Error saving data to " + filename + ": " + e.getMessage());
-      throw e;
+  
+  public static Bank load(String filename) {
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+      Bank bank = (Bank) ois.readObject();
+      bank.filename = filename;
+      int highestID = 100;
+      for (User user : bank.users) {
+        for (Account account : user.getAccounts()) {
+          if (account.getID() >= highestID) {
+            highestID = account.getID() + 1;
+          }
+        }
+      }
+      Account.setNextID(highestID);
+      for (User user : bank.users) {
+        for (Account account : user.getAccounts()) {
+          account.setOnChangeCallback(bank::save);
+        }
+      }
+      System.out.println("Data loaded! Users: " + bank.getUsers().size());
+      return bank;
+    }
+    catch (IOException | ClassNotFoundException e) {
+      System.err.println("Error loading file: " + e.getMessage());
+      System.out.println("Creating new bank.");
+      Bank bank = new Bank(filename);
+      return bank;
     }
   }
-
-  public static Bank loadFromFile(String filename) {
-    try {
-      File file = new File(filename);
-      ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-      Bank bank = (Bank) in.readObject();
-      in.close();
-      System.out.println("Data loaded from: " + file.getAbsolutePath());
-      return bank;
-    } catch (IOException | ClassNotFoundException e) {
-      System.out.println("Could not load " + filename + ", starting new bank");
-      return new Bank();
+  
+  public void save() {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+      oos.writeObject(this);
+      System.out.println("Data saved!");
+    }
+    catch (IOException ioe) {
+      System.err.println("Error saving file: " + ioe.getMessage());
     }
   }
 }

@@ -7,6 +7,6 @@ To compile:
 javac --module-path $PATH_TO_FX --add-modules javafx.controls *.java
 
 To run the app:
-java --module-path $PATH_TO_FX --add-modules javafx.controls App
+java --module-path $PATH_TO_FX --add-modules javafx.controls Dashboard
 
-This is a complete program that can deposit, withdraw, transfer your money  and show all the previous transactions with just a click of the button
+This is a complete program that can deposit, withdraw, transfer your money and show all the previous transactions with just a click of the button

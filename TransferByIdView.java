@@ -5,12 +5,12 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 
 public class TransferByIdView {
-    private AccountService accountService;
+    private Bank bank;
     private Account fromAccount;
     private Object parentView;
 
-    public TransferByIdView(AccountService accountService, Account fromAccount, Object parentView) {
-        this.accountService = accountService;
+    public TransferByIdView(Bank bank, Account fromAccount, Object parentView) {
+        this.bank = bank;
         this.fromAccount = fromAccount;
         this.parentView = parentView;
     }
@@ -31,11 +31,12 @@ public class TransferByIdView {
 
 		submitButton.setOnAction(e -> {
             try {
-                int toAccountId = Integer.parseInt(idField.getText());
+                int toAccountID = Integer.parseInt(idField.getText());
                 double amount = Double.parseDouble(amountField.getText());
+                Account toAccount = bank.getAccountByID(toAccountID);
                 if (amount <= 0) {
                     new Alert(Alert.AlertType.ERROR, "Amount must be greater than zero!").show();
-                } else if (!accountService.transferById(fromAccount, toAccountId, amount)) {
+                } else if (!fromAccount.transfer(toAccount, amount)) {
                     new Alert(Alert.AlertType.ERROR, "Transfer failed: Check ID or balance.").show();
                 } else {
                     System.out.println("TransferByIdView: Transfer completed, updating UI");

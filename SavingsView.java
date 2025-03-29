@@ -7,14 +7,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SavingsView {
-    private BankService bankService;
-    private AccountService accountService;
+    private Bank bank;
     private User user;
     private Stage stage;
 
-    public SavingsView(BankService bankService, User user, Stage stage) {
-        this.bankService = bankService;
-        this.accountService = new AccountService(bankService.getBank());
+    public SavingsView(Bank bank, User user, Stage stage) {
+        this.bank = bank;
         this.user = user;
         this.stage = stage;
     }
@@ -73,12 +71,12 @@ public class SavingsView {
 
         mainLayout.getChildren().addAll(infoBox, transactionBox, buttonBox);
 
-        depositButton.setOnAction(e -> new DepositView(accountService, savings, this).show());
-        transferButton.setOnAction(e -> new TransferView(accountService, savings, user.getAccounts().get(0), this).show());
-        requestButton.setOnAction(e -> new RequestView(accountService, user.getAccounts().get(0), savings, this).show());
+        depositButton.setOnAction(e -> new DepositView(savings, this).show());
+        transferButton.setOnAction(e -> new TransferView(savings, user.getAccounts().get(0), this).show());
+        requestButton.setOnAction(e -> new RequestView(user.getAccounts().get(0), savings, this).show());
         allTransactionsButton.setOnAction(e -> showAllTransactions(savings));
-        chequingButton.setOnAction(e -> new ChequingView(bankService, user, stage).show());
-        logoutButton.setOnAction(e -> new LoginView(bankService, stage).show());
+        chequingButton.setOnAction(e -> new ChequingView(bank, user, stage).show());
+        logoutButton.setOnAction(e -> new LoginView(bank, stage).show());
 
         Scene scene = new Scene(mainLayout, 800, 360);
         stage.setScene(scene);
@@ -99,8 +97,8 @@ public class SavingsView {
 
     private void updateTransactions(ListView<String> list, Account account) {
         list.getItems().clear();
-        for (Transaction t : account.getLatestTransactions()) {
-            list.getItems().add(t.toString(account.getID()));  // Pass account ID for perspective
+        for (Transaction t : account.getTransactions()) {
+            list.getItems().add(t.toString());
         }
         list.setId("transactionList");
     }
@@ -115,7 +113,7 @@ public class SavingsView {
 
         ListView<String> allList = new ListView<>();
         for (Transaction t : account.getTransactions()) {
-            allList.getItems().add(t.toString(account.getID()));  // Pass account ID for perspective
+            allList.getItems().add(t.toString());
         }
         allList.setPrefHeight(200);
 

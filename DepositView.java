@@ -6,12 +6,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DepositView {
-    private AccountService accountService;
     private Account account;
     private Object parentView;
 
-    public DepositView(AccountService accountService, Account account, Object parentView) {
-        this.accountService = accountService;
+    public DepositView(Account account, Object parentView) {
         this.account = account;
         this.parentView = parentView;
     }
@@ -47,7 +45,7 @@ public class DepositView {
                     if (amount <= 0) {
                         new Alert(Alert.AlertType.ERROR, "Amount must be greater than zero!").show();
                     } else {
-                        accountService.deposit(account, amount);
+                        account.deposit(amount);
                         new Alert(Alert.AlertType.INFORMATION, "Deposit successful!").show();
                         updateParent();
                         stage.close();

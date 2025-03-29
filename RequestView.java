@@ -5,16 +5,14 @@ import javafx.stage.Stage;
 
   
 public class RequestView { 
-    private AccountService accountService; 
     private Account fromAccount; // Chequing 
     private Account toAccount;   // Savings 
     private Object parentView; 
 
-    public RequestView(AccountService accountService, Account fromAccount, Account toAccount, Object parentView) { 
-        this.accountService = accountService; 
+    public RequestView(Account fromAccount, Account toAccount, Object parentView) { 
         this.fromAccount = fromAccount; 
         this.toAccount = toAccount; 
-        this.parentView = parentView; 
+        this.parentView = parentView;
     } 
     public void show() { 
         Stage stage = new Stage(); 
@@ -28,7 +26,7 @@ public class RequestView {
         submitButton.setOnAction(e -> { 
             try { 
                 double amount = Double.parseDouble(amountField.getText()); 
-                if (accountService.transfer(fromAccount, toAccount, amount)) { 
+                if (fromAccount.transfer(toAccount, amount)) { 
                     updateParent(); 
                     stage.close(); 
                 } else { 
