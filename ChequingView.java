@@ -23,7 +23,7 @@ public class ChequingView {
         mainLayout.setPadding(new Insets(15)); 
         VBox infoBox = new VBox(5);
         infoBox.setPadding(new Insets(10)); 
-        infoBox.setStyle("-fx-border-color: lightgray; -fx-border-width: 1;"); 
+        infoBox.setStyle("-fx-border-color: blue; -fx-border-width: 1;"); 
 
         Label titleLabel = new Label("Chequing Account"); 
         titleLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold;"); 
