@@ -65,7 +65,7 @@ public class LoginView {
         });
 
         // Set up the scene
-        Scene scene = new Scene(layout, 240, 240);
+        Scene scene = new Scene(layout, 240, 230);
         stage.setScene(scene);
         stage.setTitle("Bank Login");
         stage.show();

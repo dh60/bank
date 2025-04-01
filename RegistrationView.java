@@ -56,7 +56,7 @@ public class RegistrationView {
                 emailField, phoneField, addressField, submitButton);
         
         // Set up the scene
-        Scene scene = new Scene(layout, 350, 400);
+        Scene scene = new Scene(layout, 280, 350);
         Stage newStage = new Stage();
         newStage.setScene(scene);
         newStage.setTitle("Bank Registration");
