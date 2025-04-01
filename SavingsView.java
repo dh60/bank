@@ -112,10 +112,10 @@ public class SavingsView {
         for (Transaction t : account.getTransactions()) {
             allList.getItems().add(t.toString());
         }
-        allList.setPrefHeight(200);
+        allList.setPrefHeight(320);
 
         transactionLayout.getChildren().addAll(title, allList);
-        Scene scene = new Scene(transactionLayout, 350, 250);
+        Scene scene = new Scene(transactionLayout, 800, 360);
         newStage.setScene(scene);
         newStage.setTitle("All Transactions");
         newStage.show();
