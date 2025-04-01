@@ -49,21 +49,21 @@ public class ChequingView {
         HBox buttonBox = new HBox(10); 
         buttonBox.setAlignment(Pos.CENTER); 
         Button depositButton = new Button("Deposit"); 
-        depositButton.setMinWidth(100); 
+        depositButton.setMinWidth(90); 
         Button withdrawButton = new Button("Withdraw"); 
-        withdrawButton.setMinWidth(100); 
-        Button transferButton = new Button("To Savings"); 
+        withdrawButton.setMinWidth(90); 
+        Button transferButton = new Button("Transfer to Savings"); 
         transferButton.setMinWidth(100); 
-        Button transferByIdButton = new Button("To Other ID"); 
+        Button transferByIdButton = new Button("Transfer to ID"); 
         transferByIdButton.setMinWidth(100); 
-        Button allTransactionsButton = new Button("All Transactions"); 
-        allTransactionsButton.setMinWidth(100); 
-        Button savingsButton = new Button("Go to Savings"); 
-        savingsButton.setMinWidth(100); 
+        Button allTransactionsButton = new Button("Transactions"); 
+        allTransactionsButton.setMinWidth(90); 
+        Button savingsButton = new Button("Savings"); 
+        savingsButton.setMinWidth(90); 
         Button logoutButton = new Button("Logout"); 
-        logoutButton.setMinWidth(100); 
+        logoutButton.setMinWidth(90); 
   
-        buttonBox.getChildren().addAll(depositButton, withdrawButton, transferButton, transferByIdButton, 
+        buttonBox.getChildren().addAll(depositButton, withdrawButton, transferByIdButton, transferButton,
                 allTransactionsButton, savingsButton, logoutButton); 
         mainLayout.getChildren().addAll(infoBox, transactionBox, buttonBox); 
 

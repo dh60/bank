@@ -55,25 +55,22 @@ public class SavingsView {
 
         Button depositButton = new Button("Deposit");
         depositButton.setMinWidth(100);
-        Button transferButton = new Button("To Chequing");
+        Button transferButton = new Button("Transfer to Chequing");
         transferButton.setMinWidth(100);
-        Button requestButton = new Button("Request from Chequing");
-        requestButton.setMinWidth(100);
         Button allTransactionsButton = new Button("All Transactions");
         allTransactionsButton.setMinWidth(100);
-        Button chequingButton = new Button("Go to Chequing");
+        Button chequingButton = new Button("Chequing");
         chequingButton.setMinWidth(100);
         Button logoutButton = new Button("Logout");
         logoutButton.setMinWidth(100);
 
-        buttonBox.getChildren().addAll(depositButton, transferButton, requestButton,
+        buttonBox.getChildren().addAll(depositButton, transferButton,
                 allTransactionsButton, chequingButton, logoutButton);
 
         mainLayout.getChildren().addAll(infoBox, transactionBox, buttonBox);
 
         depositButton.setOnAction(e -> new DepositView(savings, this).show());
         transferButton.setOnAction(e -> new TransferView(savings, user.getAccounts().get(0), this).show());
-        requestButton.setOnAction(e -> new RequestView(user.getAccounts().get(0), savings, this).show());
         allTransactionsButton.setOnAction(e -> showAllTransactions(savings));
         chequingButton.setOnAction(e -> new ChequingView(bank, user, stage).show());
         logoutButton.setOnAction(e -> new LoginView(bank, stage).show());
