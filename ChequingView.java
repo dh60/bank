@@ -56,8 +56,8 @@ public class ChequingView {
         transferButton.setMinWidth(100); 
         Button transferByIdButton = new Button("Transfer to ID"); 
         transferByIdButton.setMinWidth(100); 
-        Button allTransactionsButton = new Button("Transactions"); 
-        allTransactionsButton.setMinWidth(90); 
+        Button allTransactionsButton = new Button("All Transactions"); 
+        allTransactionsButton.setMinWidth(100); 
         Button savingsButton = new Button("Savings"); 
         savingsButton.setMinWidth(90); 
         Button logoutButton = new Button("Logout"); 
