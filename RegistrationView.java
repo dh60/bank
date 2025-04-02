@@ -27,7 +27,7 @@ public class RegistrationView {
         usernameField.setPromptText("Enter Username");
         usernameField.setMaxWidth(250);
 
-        TextField passwordField = new TextField();
+        PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Enter Password");
         passwordField.setMaxWidth(250);
 
