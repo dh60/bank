@@ -1,7 +1,9 @@
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.io.Serializable;
 
 public class Transaction implements Serializable {
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   private int sender;
   private int recipient;
   private double amount;
@@ -11,7 +13,7 @@ public class Transaction implements Serializable {
     this.sender = sender;
     this.recipient = recipient;
     this.amount = amount;
-    date = Instant.now().toString();
+    date = LocalDateTime.now().format(FORMATTER);
   }
   
   public String toString() {
