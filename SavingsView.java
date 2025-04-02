@@ -32,7 +32,7 @@ public class SavingsView {
 
         Label nameLabel = new Label("Name: " + user.getName());
         Label idLabel = new Label("Account ID: " + savings.getID());
-        Label balanceLabel = new Label("Balance: $" + savings.getBalance());
+        Label balanceLabel = new Label(String.format("Balance: $%.2f", savings.getBalance()));
         balanceLabel.setId("balanceLabel");
         balanceLabel.setStyle("-fx-font-size: 16;");
         Label interestLabel = new Label("Interest Rate: " + savings.getInterestRate() + "%");
@@ -84,7 +84,7 @@ public class SavingsView {
     public void update(Account account) {
         Label balanceLabel = (Label) stage.getScene().lookup("#balanceLabel");
         if (balanceLabel != null) {
-            balanceLabel.setText("Balance: $" + account.getBalance());
+            balanceLabel.setText(String.format("Balance: $%.2f", account.getBalance()));
         }
         ListView<String> transactionList = (ListView<String>) stage.getScene().lookup("#transactionList");
         if (transactionList != null) {

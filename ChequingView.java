@@ -30,7 +30,7 @@ public class ChequingView {
 
         Label nameLabel = new Label("Name: " + user.getName()); 
         Label idLabel = new Label("Account ID: " + chequing.getID()); 
-        Label balanceLabel = new Label("Balance: $" + chequing.getBalance()); 
+        Label balanceLabel = new Label(String.format("Balance: $%.2f", chequing.getBalance())); 
         balanceLabel.setId("balanceLabel"); 
         balanceLabel.setStyle("-fx-font-size: 16;"); 
 
@@ -84,7 +84,7 @@ public class ChequingView {
     public void update(Account account) { 
         Label balanceLabel = (Label) stage.getScene().lookup("#balanceLabel"); 
         if (balanceLabel != null) { 
-            balanceLabel.setText("Balance: $" + account.getBalance()); 
+            balanceLabel.setText(String.format("Balance: $%.2f", account.getBalance())); 
             System.out.println("ChequingView: Updated balance to $" + account.getBalance() + " for ID " + account.getID()); 
         } else { 
             System.out.println("ChequingView: balanceLabel not found!"); 
